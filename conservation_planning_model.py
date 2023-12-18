@@ -9,19 +9,17 @@ class ConservationPlanningModel:
     def __init__(self):
         self.model = Model("Conservation planning")
 
-        # TODO
         # -- Init variables here -- #
-        self.selected = None
-        self.nb_pus = None
-        self.occ_tree_A = None
-        self.occ_tree_B = None
-        self.occ_tree_C = None
-        self.occ_tree_D = None
-        self.occ_fern = None
-        self.occ_bird = None
-        self.occ_gecko = None
+        self.selected = self.model.boolvars(N, name="PUs")
+        self.nb_pus = self.model.intvar(0, N, name="NbPUs")
+        self.occ_tree_A = self.model.intvar(0, NB_OCC_TREE_A)
+        self.occ_tree_B = self.model.intvar(0, NB_OCC_TREE_B)
+        self.occ_tree_C = self.model.intvar(0, NB_OCC_TREE_C)
+        self.occ_tree_D = self.model.intvar(0, NB_OCC_TREE_D)
+        self.occ_fern = self.model.intvar(0, NB_OCC_FERN)
+        self.occ_bird = self.model.intvar(0, NB_OCC_BIRD)
+        self.occ_gecko = self.model.intvar(0, NB_OCC_GECKO)
         # -- End init variables -- #
-        # TODO
 
         self.plant_species = [self.occ_tree_A, self.occ_tree_B, self.occ_tree_C, self.occ_tree_D, self.occ_fern]
         self.animal_species = [self.occ_bird, self.occ_gecko]
@@ -30,12 +28,17 @@ class ConservationPlanningModel:
         self.model.get_solver().show_short_statistics()
 
     def post_base_model_constraints(self):
-        # TODO
-        pass
+        self.model.sum(self.selected, "=", self.nb_pus).post()
+        self.model.scalar(self.selected, OCC_TREE_A, "=", self.occ_tree_A).post()
+        self.model.scalar(self.selected, OCC_TREE_B, "=", self.occ_tree_B).post()
+        self.model.scalar(self.selected, OCC_TREE_C, "=", self.occ_tree_C).post()
+        self.model.scalar(self.selected, OCC_TREE_D, "=", self.occ_tree_D).post()
+        self.model.scalar(self.selected, OCC_FERN, "=", self.occ_fern).post()
+        self.model.scalar(self.selected, OCC_BIRD, "=", self.occ_bird).post()
+        self.model.scalar(self.selected, OCC_GECKO, "=", self.occ_gecko).post()
 
     def solve_step_1(self) -> Solution:
-        # TODO
-        pass
+        return self.model.get_solver().find_solution()
 
     def solve_step_2(self) -> Solution:
         # TODO
