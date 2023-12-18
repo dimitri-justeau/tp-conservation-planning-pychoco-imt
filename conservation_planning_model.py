@@ -119,8 +119,8 @@ class ConservationPlanningModel:
         self.validate_covering_set_animals(solution, min_occ)
 
     def make_graph_var(self):
-        lb = create_undirected_graph(self.model, N)
-        ub = create_undirected_graph(self.model, N)
+        lb = create_undirected_graph(self.model, N, node_set_type="BIPARTITE_SET", edge_set_type="BIPARTITE_SET")
+        ub = create_undirected_graph(self.model, N, node_set_type="BIPARTITE_SET", edge_set_type="BIPARTITE_SET")
         for i in range(0, N):
             for j in get_neighbors(i):
                 ub.add_edge(i, j)
