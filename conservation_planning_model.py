@@ -46,8 +46,9 @@ class ConservationPlanningModel:
         return self.model.get_solver().find_solution()
 
     def solve_step_3(self) -> Solution:
-        #TODO
-        pass
+        for s in self.species:
+            self.model.arithm(s, ">=", 1).post()
+        return self.model.get_solver().find_optimal_solution(self.nb_pus, False)
 
     def solve_step_4(self) -> Solution:
         # TODO
