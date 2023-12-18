@@ -123,7 +123,7 @@ class ConservationPlanningModel:
         ub = create_undirected_graph(self.model, N)
         for i in range(0, N):
             for j in get_neighbors(i):
-                ub.addEdge(i, j)
+                ub.add_edge(i, j)
         g = self.model.node_induced_graphvar(lb, ub, "G")
         self.model.graph_nodes_channeling(g, self.selected).post()
         return g
