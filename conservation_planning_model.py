@@ -63,8 +63,7 @@ class ConservationPlanningModel:
         for s in self.animal_species:
             self.model.arithm(s, ">=", 2).post()
         g = self.make_graph_var()
-        #self.model.graph_connected(g).post();
-        self.model.graph_nb_connected_components(g, self.model.intvar(1, 1)).post()
+        self.model.graph_connected(g).post();
         return self.model.get_solver().find_optimal_solution(self.nb_pus, False)
 
     def print_solution(self, solution: Solution):
