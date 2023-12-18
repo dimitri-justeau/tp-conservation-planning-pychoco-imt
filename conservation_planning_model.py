@@ -1,7 +1,7 @@
 from pychoco import Model, create_undirected_graph
 from pychoco.solution import Solution
 
-from data import HEIGHT, WIDTH, OCC_TREE_A, N, OCC_TREE_B, OCC_TREE_C, OCC_TREE_D, OCC_FERN, OCC_BIRD, OCC_GECKO
+from data import *
 
 
 class ConservationPlanningModel:
@@ -55,21 +55,21 @@ class ConservationPlanningModel:
 
     def print_solution(self, solution: Solution):
         print("Conservation planning solution:")
-        print("  Nb PUs: " + solution.get_int_val(self.nb_pus))
+        print("  Nb PUs: {}".format(solution.get_int_val(self.nb_pus)))
         print("  Occurrences: ")
-        print("    Tree A: " + solution.get_int_val(self.occ_tree_A))
-        print("    Tree B: " + solution.get_int_val(self.occ_tree_B))
-        print("    Tree C: " + solution.get_int_val(self.occ_tree_C))
-        print("    Tree D: " + solution.get_int_val(self.occ_tree_D))
-        print("    Fern: " + solution.get_int_val(self.occ_fern))
-        print("    Bird: " + solution.get_int_val(self.occ_bird))
-        print("    Gecko: " + solution.get_int_val(self.occ_gecko))
+        print("    Tree A: {}".format(solution.get_int_val(self.occ_tree_A)))
+        print("    Tree B: {}".format(solution.get_int_val(self.occ_tree_B)))
+        print("    Tree C: {}".format(solution.get_int_val(self.occ_tree_C)))
+        print("    Tree D: {}".format(solution.get_int_val(self.occ_tree_D)))
+        print("    Fern: {}".format(solution.get_int_val(self.occ_fern)))
+        print("    Bird: {}".format(solution.get_int_val(self.occ_bird)))
+        print("    Gecko: {}".format(solution.get_int_val(self.occ_gecko)))
         print("  - - - - - - - - - -")
         for row in range(0, HEIGHT):
             line = "| "
             for col in range(0, WIDTH):
                 v = solution.get_int_val(self.selected[get_index_from_row_col(row, col)])
-                line += v + " "
+                line += "{} ".format(v)
             print(line + "|")
         print("  - - - - - - - - - -")
 
